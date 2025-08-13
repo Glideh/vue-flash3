@@ -1,7 +1,7 @@
 {
   "name": "vue-flash3",
   "description": "A very simple notification package for Vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "dist/vue-flash3.umd.cjs",
   "module": "dist/vue-flash3.js",

@@ -24,5 +24,5 @@
 <script setup lang="ts">
 import * as Flash from './instance'
 
-defineProps<{ noicon: boolean }>()
+defineProps<{ noicon?: boolean }>()
 </script>

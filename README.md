@@ -13,6 +13,10 @@ npm i vue-flash3
 * Include the component somewhere on the DOM
 
 ```vue
+<style>
+@use 'vue-flash3/style.css';
+</style>
+
 <template>
   <Flash />
 </template>
