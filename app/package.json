@@ -1,0 +1,41 @@
+{
+  "name": "vue-flash3",
+  "description": "A very simple notification package for Vue",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/vue-flash3.umd.cjs",
+  "module": "dist/vue-flash3.js",
+  "types": "dist/vue-flash3.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/vue-flash3.d.ts",
+      "import": "./dist/vue-flash3.js",
+      "require": "./dist/vue-flash3.umd.cjs"
+    },
+    "./style.css": "./dist/vue-flash3.css"
+  },
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vite-svg-loader": "^5.1.0",
+    "vue": "^3.5.18"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.7.0",
+    "sass-embedded": "^1.90.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2",
+    "vue-tsc": "^3.0.5"
+  }
+}

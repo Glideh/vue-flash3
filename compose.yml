@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - ./app:/app:rw,cached
+      - /app/node_modules
+    ports:
+      - "80:80"

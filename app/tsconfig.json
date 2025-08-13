@@ -1,0 +1,10 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "typeRoots": ["./dist/vue-flash3.d.ts", "node_modules/@types"]
+  },
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
