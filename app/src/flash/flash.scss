@@ -1,6 +1,5 @@
 @use "sass:color";
-@use "./flash-variables";
-
+@use "variables" as flash;
 
 .notifications-container {
     position: fixed;
@@ -13,14 +12,13 @@
     align-items: start;
     pointer-events: none;
     font-size: 1rem;
-    line-height: 1.5;
     *, *::before, *::after {
         box-sizing: border-box;
     }
 
     .notification {
-        $notif-padding: 10px;
-        background-color: #fff;
+        background-color: #eee;
+        color: #555;
         border-radius: 3px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         cursor: default;
@@ -34,7 +32,7 @@
         }
 
         >* {
-            padding: $notif-padding;
+            padding: 10px;
         }
 
         .notif-icon {
@@ -45,15 +43,15 @@
             background-color: rgba(0, 0, 0, 0.1);
             font-weight: bold;
             font-size: 2em;
-            line-height: 1;
-            font-family: monospace;
+            line-height: 0;
+            overflow: hidden;
         }
         .notif-message {
             display: flex;
             align-items: center;
         }
 
-        @each $name, $color in flash-variables.$flash-colors {
+        @each $name, $color in flash.$flash-colors {
             &.#{$name} {
                 color: color.scale($color, $lightness: +80%);
                 background-color: $color;

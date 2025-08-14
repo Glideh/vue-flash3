@@ -14,7 +14,7 @@ npm i vue-flash3
 
 ```vue
 <style>
-@use 'vue-flash3/style.css';
+@use 'vue-flash3';
 </style>
 
 <template>
@@ -45,16 +45,17 @@ import { instance as FlashI } from 'vue-flash3'
 
 FlashI.add('That\'s a very nice success message', 'success')
 FlashI.add('Oups some error has occured !', 'error')
-FlashI.add('Some info won\t hurt', 'info')
+FlashI.add('Some info won\'t hurt', 'info')
 ```
 
 ![Builtin notifications](./images/sc-basic-notifs.png)
 
-However any other types can be defined simply by defining [a color](#colors) and [an icon](#icons)
+However any other types can be defined simply by setting [a color](#colors) and [an icon](#icons)
 
 ## Message duration
 
-A third optionnal param is here to define a duration in milliseconds (default: 0 meaning the notification should stay) after which the notification disappears
+A third optionnal param is here to set the duration in milliseconds after which the notification disappears.
+_The default is 0 meaning the notification should stay_
 
 ```js
 import { instance as FlashI } from 'vue-flash3'
@@ -62,9 +63,9 @@ import { instance as FlashI } from 'vue-flash3'
 FlashI.add('That\'s a very nice success message', 'success', 5000) // Will be shown 5 seconds
 ```
 
-## Removing message
+## Removing a message
 
-The `add()` function returns the notification so it can be removed with `remove()`
+The `add()` function returns the notification so it can be removed programmatically with `remove()`
 
 ```vue
 <template>
@@ -103,31 +104,29 @@ $flash-colors: (
 
 Any type can be added and colors defined
 
-Example:
+**Example**
 
 ```scss
-$flash-colors: (
-    toto: pink,
+@use "vue-flash3" as * with (
+  $flash-colors: (
+      toto: rgb(157, 32, 136),
+  )
 );
 ```
 
 ```js
 import { instance as FlashI } from 'vue-flash3'
 
-FlashI.add('A pink message', 'pink')
+FlashI.add('A Violet notification', 'toto')
 ```
+
+![Custom color](./images/sc-violet-notif.png)
 
 ### Icons
 
-Icons can be disabled by simply setting the `noicon` prop
-
-```vue
-<Flash :noicon="true" />
-```
-
-![No icon](./images/sc-no-icon.png)
-
 The icon part can contain anything by implementing the `icons` slot
+
+**Example**
 
 ```vue
 <template>
@@ -144,7 +143,7 @@ import { Flash, instance as FlashI } from 'vue-flash3'
 import IconInfo from './icons/info-circle-solid.svg'
 
 onMounted(() => {
-    FlashI.add('Some info won\t hurt', 'info')
+    FlashI.add('Some info won\'t hurt', 'info')
 })
 </script>
 ```
@@ -152,6 +151,55 @@ onMounted(() => {
 _We are using [vite-svg-loader](https://github.com/jpkleemans/vite-svg-loader) here with an icon from [Font-Awesome](https://fontawesome.com/)_
 
 ![Custom icon](./images/sc-custom-icon.png)
+
+Icons can also be disabled by simply setting the `noicon` prop
+
+```vue
+<Flash :noicon="true" />
+```
+
+![No icon](./images/sc-no-icon.png)
+
+### HTML
+
+HTML content can be defined on the message (watch out for XSS)
+
+```js
+FlashI.add('A Violet<br />notification', 'toto')
+```
+
+![HTML content](./images/sc-html-message.png)
+
+### Putting it all together
+
+```vue
+<style lang="scss">
+@use "flash" as * with (
+  $flash-colors: (
+      toto: rgb(120, 137, 19),
+  )
+);
+</style>
+
+<template>
+  <Flash>
+    <template #icons="slotProps">
+      <span v-if="slotProps.type === 'toto'">&clubs;</span>
+    </template>
+  </Flash>
+</template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { Flash, instance as FlashI } from './flash'
+
+onMounted(() => {
+  FlashI.add('<b>Nice title</b><div>We are feeling lucky today</div>', 'toto')
+})
+</script>
+```
+
+![All together](./images/sc-all-together.png)
 
 # Develop
 

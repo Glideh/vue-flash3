@@ -1,3 +1,7 @@
+<style lang="scss">
+@use "flash";
+</style>
+
 <template>
   <Flash>
     <template #icons="slotProps">

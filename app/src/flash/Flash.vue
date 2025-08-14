@@ -1,8 +1,3 @@
-<style lang="scss">
-@use 'flash';
-</style>
-
-
 <template>
     <div class="notifications-container">
         <div v-for="notif in Flash.notifications.value" @click="Flash.remove(notif)" class="notification"
