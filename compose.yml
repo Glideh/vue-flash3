@@ -5,5 +5,5 @@ services:
     volumes:
       - ./app:/app:rw,cached
       - /app/node_modules
-    # ports:
-    #   - "80:80"
+    ports:
+      - "80:80"
