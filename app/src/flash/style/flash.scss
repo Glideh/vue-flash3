@@ -1,0 +1,61 @@
+@use "sass:color";
+@use "variables" as flash;
+
+.notifications-container {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: start;
+    pointer-events: none;
+    font-size: 1rem;
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    .notification {
+        background-color: #eee;
+        color: #555;
+        border-radius: 3px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        cursor: default;
+        display: flex;
+        align-items: stretch;
+        pointer-events: auto;
+        // opacity: .9;
+        transition: box-shadow 0.3s;
+        &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        >* {
+            padding: 10px;
+        }
+
+        .notif-icon {
+            display: flex;
+            align-items: center;
+            width: 45px;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            font-size: 2em;
+            line-height: 0;
+            overflow: hidden;
+        }
+        .notif-message {
+            display: flex;
+            align-items: center;
+        }
+
+        @each $name, $color in flash.$flash-colors {
+            &.#{$name} {
+                color: color.scale($color, $lightness: +80%);
+                background-color: $color;
+            }
+        }
+    }
+}

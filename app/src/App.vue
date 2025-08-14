@@ -1,5 +1,9 @@
 <style lang="scss">
-@use "flash";
+@use "flash/style"/* with (
+  $flash-colors: (
+    toto: red
+  )
+)*/;
 </style>
 
 <template>

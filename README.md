@@ -14,7 +14,7 @@ npm i vue-flash3
 
 ```vue
 <style>
-@use 'vue-flash3';
+@import 'vue-flash3';
 </style>
 
 <template>
@@ -35,6 +35,8 @@ FlashI.add('That\'s a very nice success message')
 ```
 
 ![First notification](./images/sc-success-notif.png)
+
+_Clicking on the notification makes it disappear. It can also [disappear after a duration](#message-duration) if specified_
 
 ## Message types
 
@@ -107,7 +109,7 @@ Any type can be added and colors defined
 **Example**
 
 ```scss
-@use "vue-flash3" as * with (
+@use "vue-flash3/scss" with (
   $flash-colors: (
       toto: rgb(157, 32, 136),
   )
@@ -174,7 +176,7 @@ FlashI.add('A Violet<br />notification', 'toto')
 
 ```vue
 <style lang="scss">
-@use "flash" as * with (
+@use "vue-flash3/scss" with (
   $flash-colors: (
       toto: rgb(120, 137, 19),
   )

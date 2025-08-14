@@ -1,7 +1,9 @@
+import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import svgLoader from 'vite-svg-loader'
-import path from 'path'
+import copy from 'rollup-plugin-copy'
+import fs from 'fs'
 
 export default defineConfig({
   server: {
@@ -12,7 +14,15 @@ export default defineConfig({
     vue(),
     svgLoader({
       defaultImport: 'component'
-    })
+    }),
+    {
+      name: 'create-root-scss',
+      closeBundle() {
+        const outPath = path.resolve(__dirname, 'dist/scss.scss')
+        const content = `@forward "./scss/index.scss";\n`
+        fs.writeFileSync(outPath, content, 'utf-8')
+      }
+    }
   ],
   build: {
     lib: {
@@ -27,6 +37,14 @@ export default defineConfig({
           vue: "Vue",
         },
       },
+      plugins: [
+        copy({
+          targets: [
+            { src: path.resolve(__dirname, 'src/flash/style/*'), dest: 'dist/scss' },
+          ],
+          hook: 'writeBundle'
+        })
+      ]
     },
     sourcemap: true,
     emptyOutDir: true,
