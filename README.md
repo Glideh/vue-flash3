@@ -172,6 +172,31 @@ FlashI.add('A Violet<br />notification', 'toto')
 
 ![HTML content](./images/sc-html-message.png)
 
+Reactive content can also be used
+
+```js
+import { onMounted, h } from 'vue'
+import { Flash, instance as FlashI } from './flash'
+
+function popFlash(e: Event) {
+  e.stopPropagation()
+  FlashI.remove(FlashI.notifications.value[0])
+}
+
+onMounted(() => {
+  FlashI.add({
+    render: () => h('div', [
+      'This is a reactive message ',
+      h('a', {
+        onClick: popFlash
+      }, 'now do something reactive')
+    ]),
+  }, 'success')
+})
+```
+
+_Here we are removing the first message of the stack at each click_
+
 ### Putting it all together
 
 ```vue

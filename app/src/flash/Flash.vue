@@ -2,6 +2,7 @@
 @use "style";
 </style>
 
+
 <template>
     <div class="notifications-container">
         <div v-for="notif in Flash.notifications.value" @click="Flash.remove(notif)" class="notification"
@@ -13,7 +14,10 @@
                     <template v-if="notif.type === 'info'">&#8981;</template>
                 </slot>
             </div>
-            <div class="notif-message"><div v-html="notif.message"></div></div>
+            <div class="notif-message">
+                <component v-if="typeof notif.message === 'object'" :is="{...notif.message}" />
+                <div v-else v-html="notif.message"></div>
+            </div>
         </div>
         <slot></slot>
     </div>
@@ -23,5 +27,9 @@
 <script setup lang="ts">
 import * as Flash from './instance'
 
-defineProps<{ noicon?: boolean }>()
+withDefaults(defineProps<{
+    noicon?: boolean
+}>(), {
+    noicon: false
+})
 </script>
